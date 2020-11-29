@@ -203,3 +203,18 @@ Make sure you're running the latest version of `node`. Make sure the following d
 3. Update current user status saga to call Redux Cart server API
 4. User saga to `put` action containing returned information to the app
 5. Trigger reducers and update display components
+
+## 20. Fork
+1. Invokes the specified method (like call)
+2. Can't access yielded variables
+3. Caller continues without pausing execution
+4. If parent process errors or is cancelled, all forked processes are cancelled
+5. `finally` block of forked method is invoked during cancellation
+
+## 21. Implementing Fork
+1. User's list of items in cart (as IDs) returned from AJAX call
+2. Saga forks one process each to fetch item details for each item
+3. Item details are displayed to user as they arrive from server
+4. Ex: 
+    * `fetchCartSaga` to get cart data for a user using API
+    * `itemDetailsSaga` to get individual items data
