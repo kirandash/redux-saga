@@ -252,3 +252,15 @@ Make sure you're running the latest version of `node`. Make sure the following d
 ## 24. Select
 1. Returns a copy of the application's state when yielded to
 2. Any passed selectors are invoked
+
+## 25. Spawn effect
+1. Creates a new process, similar to fork - caller is not interrupted
+2. New process is not child of caller - will not be cancelled if caller errors or is itself cancelled
+
+## 26. All
+1. Combines numerous take statements into one
+2. Code execution resumes when all actions have been dispatched (in any order)
+3. Ex: 
+    * Item price saga waits for `SET_CURRENT_USER` and `SET_CART_ITEMS` actions using `all`
+    * Once all actions hv been dispatched, calls API to fetch item prices
+    * itemPriceSaga.js
