@@ -12,4 +12,5 @@ export const App = ()=>(
     </div>
 );
 
+// dispatch getCurrentUserInfo action with ID
 store.dispatch(getCurrentUserInfo(`U10000`));

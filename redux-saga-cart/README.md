@@ -164,3 +164,42 @@ Make sure you're running the latest version of `node`. Make sure the following d
 2. Redux saga wraps generators automatically (no need of .then() every time)
     * Sagas are wrapped by redux saga, .then() is never manually called
 3. Co.js can wrap generators outside of redux-saga app
+
+## 14. Wrapping Generators with Redux Saga and Co
+1. Run generator with Redux saga
+2. Note that promises are resolved automatically.
+3. Implement co for similar effect
+    * co allows us to wrap generator fn so that .then method can be implemented.
+
+## 15. Effects
+1. Utility method provided by Redux saga
+2. Returns an object containing instructions for redux saga
+3. Redux saga generates the side effects, not the effect itself
+4. Categories of effect:
+    * thread management: call, fork, spawn, apply, cancel
+    * action creation: put
+    * data seeding: select
+    * Flow control: take, takeEvery, takeLatest
+
+## 16. Take
+1. Pauses b/w concurrent lines of code
+2. Code resumes when specific action is dispatched
+3. Only one thread - multiple actions do not lead to multiple responses
+4. Properties of action are passed as yielded variable
+
+## 17. Put
+1. Immediately dispatches an action to the rest of the app
+2. Code execution does not pause
+3. Like calling dispatch in Redux-Thunk or React-Redux
+
+## 18. Call
+1. Calls the specific method
+2. Equivalent to invoking the method directly
+3. Used for testing
+
+## 19. Implementing Take, Call and Put in app
+1. `currentUserSaga` waits for `GET_CURRENT_USER_INFO` action with take
+2. Current user information only ever needs to be fetched once
+3. Update current user status saga to call Redux Cart server API
+4. User saga to `put` action containing returned information to the app
+5. Trigger reducers and update display components
