@@ -305,3 +305,7 @@ Make sure you're running the latest version of `node`. Make sure the following d
 1. **Shipping Saga**:
     * shippingSaga.js
     * use takeLatest, select
+
+### 3.5 Tax Rate Saga
+1. taxRateSaga.js
+2. Use: take and put
