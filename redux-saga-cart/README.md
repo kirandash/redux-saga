@@ -309,3 +309,6 @@ Make sure you're running the latest version of `node`. Make sure the following d
 ### 3.5 Tax Rate Saga
 1. taxRateSaga.js
 2. Use: take and put
+
+### 3.6 Checkout availability saga
+1. use actionChannel
