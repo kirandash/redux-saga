@@ -300,3 +300,8 @@ Make sure you're running the latest version of `node`. Make sure the following d
     * Messages from socket are handled in while-loop, state is updated
 5. Code:
     * `customerServiceAvailabilitySaga`
+
+### 3.4 Adding more sagas
+1. **Shipping Saga**:
+    * shippingSaga.js
+    * use takeLatest, select
