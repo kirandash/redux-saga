@@ -264,3 +264,39 @@ Make sure you're running the latest version of `node`. Make sure the following d
     * Item price saga waits for `SET_CURRENT_USER` and `SET_CART_ITEMS` actions using `all`
     * Once all actions hv been dispatched, calls API to fetch item prices
     * itemPriceSaga.js
+
+## 27. Redux Saga Effects summary
+1. Effects create plain objects - Redux saga interprets them and execute processes
+2. Take, TakeEvery and TakeLatest wait for a specific kind of action to create a new process
+3. Call, Fork and Spawn create different kind of new processes
+4. Forked processes are cancelled when their parent is cancelled or errors
+5. Take and Call pause the execution of caller process
+
+## 3. Channels
+### 3.1 What are channels?
+1. Action Channels: 
+    * Buffer actions to be processed one at a time
+2. Event Channel:
+    * Connects app to outside event sources Ex: websocket channel
+3. Channel/generic channel:
+    * Communicate b/w two sagas
+
+### 3.1 Action Channel
+1. Records all events with specified type
+2. Calling `take` accesses and removes oldest record
+3. Used to handle actions that would otherwise be lost
+
+### 3.2 Generic Channel
+1. Creates special line of communication b/w two sagas
+2. Action types not required
+
+### 3.3 Event Channel
+1. Wraps an outside source of events (i.e. WebSocket)
+2. Sagas can `take` from Event channel
+3. Event channel converts Events into take-able actions and emits them
+4. Ex: 
+    * App uses websocket to communicate with customer support API
+    * Event channel converts socket callbacks into yieldable promises
+    * Messages from socket are handled in while-loop, state is updated
+5. Code:
+    * `customerServiceAvailabilitySaga`
