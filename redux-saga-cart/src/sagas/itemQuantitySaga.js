@@ -1,13 +1,14 @@
+// select: returns a copy of the state in app
 import { takeLatest, select, put, call } from 'redux-saga/effects'
 import fetch from 'isomorphic-fetch';
 
 import {
-    INCREASE_ITEM_QUANTITY,
-    DECREASE_ITEM_QUANTITY,
-    setItemQuantityFetchStatus,
-    decreaseItemQuantity,
-    FETCHING,
-    FETCHED
+    INCREASE_ITEM_QUANTITY, // action
+    DECREASE_ITEM_QUANTITY, // action
+    setItemQuantityFetchStatus, // ac
+    decreaseItemQuantity, // ac
+    FETCHING, // constant
+    FETCHED // constant
 } from './../actions'
 
 import {
@@ -15,7 +16,9 @@ import {
 } from '../selectors'
 
 export function* handleIncreaseItemQuantity({id}) {
+    // Start fetching - status
     yield put(setItemQuantityFetchStatus(FETCHING));
+    // select
     const user = yield select(currentUserSelector);
     const response = yield call(fetch,`http://localhost:8081/cart/add/${user.get('id')}/${id}`);
 
@@ -23,6 +26,7 @@ export function* handleIncreaseItemQuantity({id}) {
         yield put(decreaseItemQuantity(id, true));
         alert("Sorry, there weren't enough items in stock to complete your request.");
     }
+    // No longer fetching - status
     yield put(setItemQuantityFetchStatus(FETCHED));
 }
 

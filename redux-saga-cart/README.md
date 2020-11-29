@@ -218,3 +218,37 @@ Make sure you're running the latest version of `node`. Make sure the following d
 4. Ex: 
     * `fetchCartSaga` to get cart data for a user using API
     * `itemDetailsSaga` to get individual items data
+
+## 22. TakeEvery effect
+1. Works like take, except forks the specified method every time specific action is dispatched
+2. Code execution resumes immediately in main thread
+3. Ex:
+    * Create a saga that invokes a method each time a specified action is dispatched
+    * multiple threads can be created in conjuction with TakeEvery
+
+## 23. Cancel and Cancelled effect
+1. **Cancel**
+    1. Stops a forked process
+    2. Stopped process will be cut off at most recent yield
+    3. `finally{}` is invoked in forked process
+2. **Cancelled**:
+    * Method that returns true if callee process has been cancelled by caller
+    * Used in finally block to determine if cancellation (not error) is cause of termination
+
+## 23. TakeLatest
+1. Combination of fork, takeEvery and cancel
+2. Forks child process each time specified action is dispatched, while keeping exactly one instance of the child process running.
+3. Flow:
+    * Specified action is dispatched
+    * Child process is forked in response
+    * Child process runs in own thread
+    * Specified action is dispatched again
+    * Child process is cancelled
+    * Go to step 2
+4. Ex: 
+    * `itemQuantitySaga` will only take the latest dispatch of `INCREASE_ITEM_QUANTITY` action
+    * Each time user adds or removes an item, the existing process will be cancelled and a new one forked
+
+## 24. Select
+1. Returns a copy of the application's state when yielded to
+2. Any passed selectors are invoked
