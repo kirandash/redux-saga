@@ -368,3 +368,40 @@ Make sure you're running the latest version of `node`. Make sure the following d
 1. `itemQuantitySaga.spec.js`
 2. Inject `successful` server response and test output against expected values
 3. Inject `unsuccessful` server response and test output against expected values
+
+### 4.5 Summary
+1. Redux saga effects prevent side effects from actually occuring outside of redux saga
+2. Sagas must be written to use `call` instead of directly invoking API methods
+3. Dependencies do not need to be injected for unit tests
+4. Effects can not be easily tested against expected values
+5. Support for e2e driven methodology exists within community
+
+## 5 Summary
+1. **Sagas**: 
+    * A long running thread or fn
+    * Originated in banking/CS
+        * To break one long single locking mechansim into several small non locking ones
+    * Sagas in JS are special generators which yield Redux saga effects
+2. **Async ES6**: 
+    * Only generator fns can contain yield keyword
+    * Code which yields a promise stops executing until promise resolves within Redux saga
+    * Generators can run forever using a while(true) loop, but stop if they encounter an error
+3. **Effects**:
+    * Redux saga provides effect creators that create JS objects
+    * Effect objects cause side-effects when yielded inside a Redux saga app, but have no effect outside the context
+    * Effects can prompt Redux saga to make API calls, create new threads, dispatch actions etc.
+4. **Channels**:
+    * Channels provide required functionality for dealing with corner cases
+    * Event channels can be used to handle sockets or other outside event sources
+    * Action channels queue actions of a specified type so that none are missed
+5. **Testing**:
+    * UTs verify the value of yielded effects
+    * Sagas are advanced manually during tests and can be tested instantly
+    * Sagas must be written using call in order to use unit tests effectively
+    * e2e tests require injecting mock apis and creating a mock store
+
+## 6. Next Tasks
+1. Add another page where users can view and add items to their cart, using Redux saga
+2. Write tests for some other sagas (including checkout saga)
+3. Implement e2e tests
+4. Update checkout screens to provide more detailed error info
