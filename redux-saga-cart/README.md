@@ -315,3 +315,51 @@ Make sure you're running the latest version of `node`. Make sure the following d
 
 ### 3.7 Checkout Saga
 1. checkoutSaga.js
+
+### 3.8 Summary
+1. Generic channels can allow for communication b/w sagas
+2. Action channels create a buffer for actions
+3. Event channels can emit take-friendly actions from non-promise based outside sources
+
+## 4 Testing Redux Saga
+### 4.1 Testing Redux Saga Apps - Intro
+1. Tests need to avoid making real AJAX calls
+2. Effects do not do anything unless `run` by Redux saga
+3. `call()`: call effect must be used instead of yielding directly to API methods
+    * Saga is untestable if we invoke the generator directly
+    * Saga is testable when we yield a call effect
+
+### 4.2 Methods for testing redux saga app
+1. Official Method:
+    * Saga is executed as plain generator
+    * Tests pass mock values to `next()`
+    * Structure of effects is tested against expected values
+    * `store` is never used
+2. Alternate method:
+    * Mock store and app state are created
+    * Entire saga is run from beginning to end
+    * At completion, new state is compared to expected value
+    * APIs must be injected as dependencies
+3. Comparision
+    * Standard(unit test) - recommended by official sga
+        * Requires that `call` be used for fns
+        * Can not test app state against expected values
+        * Outside APIs can be imported with no special considerations
+        * Tests are brief and simple to set up
+        * Test fails if yielded effects do not match expected values
+    * Alternate(e2e test)
+        * `Call` usage recommended but not required
+        * Can test app state against expected values
+        * Any outside APIs must be injected as dependencies
+        * Tests are complex and require preparation of mock store and APIs
+        * Test fails if final app state doesn't match expected values
+
+### 4.3 Implement unit tests for app
+1. Inject mock server response using yield
+2. Compare generated `put` effect to expected values
+3. Note that outside APIs are not being called (`call` usage)
+4. Ex:
+    * Create test for current user saga
+    * `next()` is called manually for each step of generator execution
+    * Yielded `call` and `put` effects will be tested against expected values
+5. `currentUserSaga.spec.js`
