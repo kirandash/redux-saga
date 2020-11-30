@@ -312,3 +312,6 @@ Make sure you're running the latest version of `node`. Make sure the following d
 
 ### 3.6 Checkout availability saga
 1. use actionChannel
+
+### 3.7 Checkout Saga
+1. checkoutSaga.js
