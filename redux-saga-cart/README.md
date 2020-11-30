@@ -363,3 +363,8 @@ Make sure you're running the latest version of `node`. Make sure the following d
     * `next()` is called manually for each step of generator execution
     * Yielded `call` and `put` effects will be tested against expected values
 5. `currentUserSaga.spec.js`
+
+### 4.4 Implement tests for item quantity saga - success and fail api
+1. `itemQuantitySaga.spec.js`
+2. Inject `successful` server response and test output against expected values
+3. Inject `unsuccessful` server response and test output against expected values
