@@ -8,3 +8,8 @@
 2. Dummy API used: 
     * rem rest api: https://rem-rest-api.herokuapp.com/
     * users api: http://rem-rest-api.herokuapp.com/api/users
+
+## 3. Setting up users redux actions, reducers
+1. actions/users.js
+2. reducers/users.js
+3. wire up redux in reducers/index.js and src/index.js

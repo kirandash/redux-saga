@@ -4,17 +4,24 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 // Axios import
 import axios from 'axios';
+import reducers from './reducers';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
 // Axios Setup
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://rem-rest-api.herokuapp.com/api'
+
+const store = createStore(reducers);
 
 // Synax to call APIs with axios
 // axios.get(/users) 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
