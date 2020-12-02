@@ -1,6 +1,11 @@
+import GenTest from "./GenTest";
+
 function App() {
   return (
-    <div>Test</div>
+    <>
+      <div>Test</div>
+      <GenTest />
+    </>
   );
 }
 
