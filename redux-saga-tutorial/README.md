@@ -47,3 +47,8 @@
     * js is single threaded but saga can fork a process and run multiple processes in parallel. Thus, if any process fails other processes won't fail
 3. **all**
     * allow all forked processes to create in parallel
+
+## 7. Connecting the Saga middleware
+1. create saga middleware with createSagaMiddleware: `const sagaMiddleware = createSagaMiddleware();`
+2. add saga middeware to store with applyMiddleware: `applyMiddleware(sagaMiddleware)`
+3. Run saga middleware on root saga: `sagaMiddleware.run(rootSaga)`

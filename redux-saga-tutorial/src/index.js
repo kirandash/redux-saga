@@ -6,13 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import reducers from './reducers';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 
 // Axios Setup
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://rem-rest-api.herokuapp.com/api'
 
-const store = createStore(reducers);
+// create saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+// add middleware to store
+const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+
+// Run saga middleware on root saga
+sagaMiddleware.run(rootSaga)
 
 // Synax to call APIs with axios
 // axios.get(/users) 
