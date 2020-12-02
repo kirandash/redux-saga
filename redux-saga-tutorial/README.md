@@ -38,3 +38,12 @@
 6. All redux sagas run through this while(true) loop under the hood
     * Ex: takeEvery is running a while(true) loop under the hood
     * It means: it is constantly watching for any dispatched action.
+
+## 6. Get users saga with call, fork and all
+1. **call**:
+    * It allows us to call a fn say promise and then it waits for it to be resolved.
+    * No need to write callbacks
+2. **fork**:
+    * js is single threaded but saga can fork a process and run multiple processes in parallel. Thus, if any process fails other processes won't fail
+3. **all**
+    * allow all forked processes to create in parallel
