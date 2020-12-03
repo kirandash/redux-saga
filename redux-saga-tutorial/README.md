@@ -52,3 +52,11 @@
 1. create saga middleware with createSagaMiddleware: `const sagaMiddleware = createSagaMiddleware();`
 2. add saga middeware to store with applyMiddleware: `applyMiddleware(sagaMiddleware)`
 3. Run saga middleware on root saga: `sagaMiddleware.run(rootSaga)`
+
+## 8. Connecting all together and calling API from app component
+1. Connect App component to redux store
+2. Life cycle: 
+    * App.js: getUsersRequest action is dispatched
+    * watchGetUsersRequest saga is watching to action
+    * will call the getUsers worker saga
+    * It will call the getUsers api
