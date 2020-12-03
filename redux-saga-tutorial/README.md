@@ -60,3 +60,5 @@
     * watchGetUsersRequest saga is watching to action
     * will call the getUsers worker saga
     * It will call the getUsers api
+
+## 9. Dispatching redux actions from saga using put

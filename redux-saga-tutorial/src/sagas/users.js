@@ -1,5 +1,5 @@
  // takeEvery
- import {takeEvery, call, fork} from 'redux-saga/effects';
+ import {takeEvery, call, fork, put} from 'redux-saga/effects';
  // actions
  import * as actions from '../actions/users';
  // axios - apis
@@ -9,7 +9,11 @@ function* getUsers() {
     try{
         const result = yield call(api.getUsers);
         // once the code above is resolved: code below will be run
-        console.log(result)
+        // console.log(result)
+        // dispatch another action with put effect
+        yield put(actions.getUsersSuccess({
+            items: result.data.data
+        }));
     }catch(e) {
         console.log(e)
     }
