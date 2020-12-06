@@ -62,3 +62,5 @@
     * It will call the getUsers api
 
 ## 9. Dispatching redux actions from saga using put
+1. takeLatest:
+    * current call is cancelled and latest call is used.

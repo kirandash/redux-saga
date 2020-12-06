@@ -1,41 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './style.css';
 import App from './components/App';
-import reportWebVitals from './reportWebVitals';
-// Axios import
-import axios from 'axios';
 import reducers from './reducers';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
+import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Axios Setup
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://rem-rest-api.herokuapp.com/api'
-
-// create saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-// add middleware to store
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://rem-rest-api.herokuapp.com/api';
+
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
-// Run saga middleware on root saga
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
-// Synax to call APIs with axios
-// axios.get(/users) 
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
